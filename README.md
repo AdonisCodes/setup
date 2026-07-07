@@ -11,7 +11,6 @@ Synced to GitHub so skills and setup travel across machines. **Secrets stay loca
 | `cursor/skills/` | Agent skills (workflows the agent follows) |
 | `cursor/mcp.json.example` | MCP server config template |
 | `bin/` | Helper scripts (`chrome-cdp`, etc.) |
-| `automations/` | Config examples for background daemons |
 
 ## Install on a new machine
 
@@ -32,13 +31,9 @@ Then reload MCP in Cursor Settings and run `chrome-cdp` before browser-driven wo
 
 ## Never synced (secrets)
 
-- `~/.config/fitness-overlay-sync/config.json`
-- Strava OAuth tokens
-- Outstand / API keys
 - Chrome profile copies (cookies, sessions)
+- Any API keys or tokens
 - `.env` files
-
-Use `*.example.json` files as templates and fill in locally.
 
 ## Skills
 

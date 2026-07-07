@@ -17,7 +17,7 @@ Drive the pipeline manually via browser MCP and shell — no brittle automation 
 - `ffmpeg` / `ffprobe` on PATH
 - Chrome DevTools MCP configured to attach to real Chrome (see `cursor/mcp.json.example`)
 - `bin/chrome-cdp` launched before browser work
-- Insta360 videos in iCloud watch folder: `~/Library/Mobile Documents/com~apple~CloudDocs/Fitness-Overlay-Sync`
+- Insta360 video file path (typically in iCloud Drive)
 
 ## YouTube channel
 
@@ -84,7 +84,7 @@ Example: `2026/06/29 "3.5km Easy Run"`
 ```bash
 fitoverlay \
   --fit "/path/to/activity.fit" \
-  --out "/path/to/Fitness-Overlay-Sync/out" \
+  --out "/path/to/out" \
   --encoder h264 \
   --crf 28 \
   "/path/to/VID_....MP4"
@@ -101,7 +101,20 @@ Verify with `ffprobe` when done.
 3. Upload overlay mp4 via file input (`upload_file` MCP tool)
 4. Set title: `YYYY/MM/DD "Activity Name"`
 5. Set visibility and publish
-6. Take screenshots at each step for user verification
+6. Capture the final watch URL (`https://www.youtube.com/watch?v=...`)
+7. Take screenshots at each step for user verification
+
+### 6. Add YouTube link to Strava description
+
+Final step — link the published video back on the Strava activity:
+
+1. Navigate to the activity edit page: `https://www.strava.com/activities/<activity_id>/edit`
+2. Append a new line at the bottom of the existing description:
+   ```
+   YouTube: https://www.youtube.com/watch?v=<video_id>
+   ```
+3. Preserve existing description text — only add the line, don't overwrite.
+4. Save.
 
 ## What never goes in this repo
 
