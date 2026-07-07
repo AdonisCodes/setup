@@ -105,7 +105,5 @@ Verify with `ffprobe` when done.
 
 ## What never goes in this repo
 
-- `~/.config/fitness-overlay-sync/config.json` (API keys)
-- `strava_tokens.json`
-- Chrome profile directories (`~/.chrome-cdp-profile`, `~/.cache/chrome-devtools-mcp/`)
-- `.env` files with secrets
+- Chrome profile directories (`~/.chrome-cdp-profile`, `~/.cache/chrome-devtools-mcp/`) — cookies/sessions
+- `.env` files or any API keys / tokens
