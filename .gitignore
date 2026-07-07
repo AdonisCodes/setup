@@ -1,0 +1,10 @@
+# Secrets — never commit
+config.json
+*.env
+.env.*
+strava_tokens.json
+state.json
+
+# Local / machine-specific
+.DS_Store
+*.local.json

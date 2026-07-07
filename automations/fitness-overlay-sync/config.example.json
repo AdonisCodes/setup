@@ -1,0 +1,17 @@
+{
+  "watch_dir": "/Users/simonferns/Library/Mobile Documents/com~apple~CloudDocs/Fitness-Overlay-Sync",
+  "outstand_api_key": "ost_YOUR_KEY_HERE",
+  "youtube_account_id": "IUBUX",
+  "strava": {
+    "client_id": "YOUR_STRAVA_CLIENT_ID",
+    "client_secret": "YOUR_STRAVA_CLIENT_SECRET",
+    "redirect_uri": "http://127.0.0.1:8765/strava/callback",
+    "oauth_port": 8765
+  },
+  "utc_offset_secs": null,
+  "submodule_path": "vendor/fitness-overlay-v1",
+  "work_dir": "work",
+  "processed_subdir": "processed",
+  "stable_secs": 12,
+  "poll_interval_secs": 30
+}

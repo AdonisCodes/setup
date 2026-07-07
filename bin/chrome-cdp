@@ -1,0 +1,44 @@
+#!/bin/bash
+# Launch normal Chrome (no automation flag) with CDP for agent control.
+# Uses a copy of your real profile so Google/Strava login isn't blocked.
+set -euo pipefail
+
+SRC="$HOME/Library/Application Support/Google/Chrome"
+DEST="$HOME/.chrome-cdp-profile"
+PORT=9222
+URL="${1:-about:blank}"
+
+if pgrep -f "user-data-dir=$DEST" >/dev/null 2>&1; then
+  echo "Chrome CDP profile already running."
+else
+  echo "Syncing profile copy..."
+  mkdir -p "$DEST"
+  rsync -a --delete \
+    --exclude 'Singleton*' \
+    --exclude '*/Cache/*' \
+    --exclude '*/Code Cache/*' \
+    --exclude '*/GPUCache/*' \
+    "$SRC/" "$DEST/"
+
+  rm -f "$DEST/SingletonLock" "$DEST/SingletonCookie" "$DEST/SingletonSocket"
+
+  echo "Launching Chrome on port $PORT..."
+  # open -na launches Chrome as a detached app so it survives the parent shell exiting.
+  open -na "Google Chrome" --args \
+    --remote-debugging-port="$PORT" \
+    --user-data-dir="$DEST" \
+    --no-first-run \
+    --no-default-browser-check \
+    "$URL"
+fi
+
+for i in $(seq 1 15); do
+  if curl -sf "http://127.0.0.1:$PORT/json/version" >/dev/null; then
+    echo "CDP ready: http://127.0.0.1:$PORT"
+    exit 0
+  fi
+  sleep 1
+done
+
+echo "Chrome failed to expose CDP. See /tmp/chrome-cdp.log" >&2
+exit 1
